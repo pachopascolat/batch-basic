@@ -11,6 +11,17 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'crud' => [
+            'class' => 'app\modules\crud\Module',
+        ],
+        'user' => [
+            'class' => Da\User\Module::class,
+            'classMap' => [
+                'User'=> \app\modules\crud\models\User::class,
+            ]
+        ]
+    ],
     'components' => [
         'request' => [
             'parsers' => [
@@ -22,10 +33,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-        ],
+//        'user' => [
+//            'identityClass' => 'app\modules\crud\models\User',
+//            'enableAutoLogin' => true,
+//        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -51,6 +62,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'crud/api/equipo'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'crud/api/club'],
+//                ['class' => 'yii\rest\UrlRule', 'controller' => ['crud/api/equipo','crud/api/club']],
             ],
         ],
 
